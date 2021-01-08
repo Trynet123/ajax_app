@@ -9,6 +9,9 @@ class PostsController < ApplicationController
   end
 
   def checked
+    # binding.pry
+    # params[:id]には"${postId}"
+
     # 既読したメモのid
     post = Post.find(params[:id])
     if post.checked 
