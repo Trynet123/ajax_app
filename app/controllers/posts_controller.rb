@@ -7,4 +7,24 @@ class PostsController < ApplicationController
     Post.create(content: params[:content])
     redirect_to action: :index
   end
+
+  def checked
+    # binding.pry
+    # params[:id]には"${postId}"
+
+    # 既読したメモのid
+    post = Post.find(params[:id])
+    if post.checked 
+      post.update(checked: false)
+      # 既読を解除するためにfalseへ変更
+    else
+      post.update(checked: true)
+      # 既読にするためtrueへ変更
+    end
+
+    item = Post.find(params[:id])
+    # 更新したレコード
+    render json: { post: item }
+    # JSON形式（データ）としてchecked.jsに返却
+  end
 end
